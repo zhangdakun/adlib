@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ADLib</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+
+
+    <string name="other">更多</string>
+    <string name="menu_settings">推荐</string>
+    
+    <string name="ad_recomment">推荐</string>
+    <string name="ad_other">更多</string>
+
+</resources>
