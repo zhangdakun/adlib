@@ -1,11 +1,11 @@
 package com.android.adlib;
 
-import net.youmi.android.offers.OffersManager;
+import net.youmi.android.offers.OffersManager;import net.youmi.android.smart.SmartBannerManager;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.Menu;import android.view.MotionEvent;
 import android.view.MenuItem;
-
+import com.umeng.analytics.MobclickAgent;
 
 public class ADbaseActivity extends Activity {
 	@Override
@@ -31,13 +31,13 @@ public class ADbaseActivity extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		OffersManager.getInstance(this).onAppLaunch();
-		AD.i().chabostart(this);
-	}
-	@Override
+		AD.i().chabostart(this);        SmartBannerManager.init(this);        SmartBannerManager.show(this);        		MobclickAgent.onError(this);
+	}	protected void setChaboInterval(long interval) {		AD.i().setChaboInterval(interval);	}
+	@Override	protected void onResume() {		// TODO Auto-generated method stub		super.onResume();		MobclickAgent.onResume(this);	}	@Override	protected void onPause() {		// TODO Auto-generated method stub		super.onPause();		MobclickAgent.onPause(this);	}	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		AD.i().chabostop(this);
 		super.onDestroy();
-		AD.i().chabostop(this);
-	}
+		
+	}	@Override	public boolean onTouchEvent(MotionEvent event) {		// TODO Auto-generated method stub		AD.i().setShowFlag(false);		return super.onTouchEvent(event);	}
 	
 }

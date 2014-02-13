@@ -3,7 +3,7 @@ package com.android.adlib;
 import net.youmi.android.diy.DiyManager;
 import net.youmi.android.offers.OffersManager;
 import net.youmi.android.offers.PointsManager;
-import net.youmi.android.spot.SpotManager;
+import net.youmi.android.smart.SmartBannerManager;import net.youmi.android.spot.SpotManager;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -86,29 +86,25 @@ public class AD {
 			sp.edit().putLong("first", current).commit();
 		}
 	}
-
+	private long CHABO_INTERVAL = 5 * 60 * 1000L;	private boolean show = true;		public void setChaboInterval(long interval) {		CHABO_INTERVAL = interval;	}	public void setShowFlag(boolean flag) {		show = flag;	}	
 	class ChaboThread extends Thread {
 		Context context;
-
 		public ChaboThread(Context context) {
-			super();
-			this.context = context;
+			super();
+			this.context = context;
 		}
-
 		@Override
 		public void run() {
-			// TODO Auto-generated method stub
+			// TODO Auto-generated method stub
 			// super.run();
 			while (isrun) {
 				try {
-					Thread.sleep(5 * 60 * 1000L);
+					Thread.sleep(CHABO_INTERVAL);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
-				showChaBo(context);
-
-
+				}				if(show) {
+//					showChaBo(context);					SmartBannerManager.show(this.context);				}else  {					show = true;				}
 			}
 		}
 
@@ -116,14 +112,14 @@ public class AD {
 
 	public ChaboThread chabo = null;
 	public static boolean isrun = false;
-	public static AD instance = new AD();
+	public static AD adinstance = new AD();
 	
 	
 
 	public void chabostart(Context context) {
 //		Log.d(tag, msg)
 		isrun = true;
-		if(null == instance.chabo) {
+		if(null == adinstance.chabo) {
 			chabo = new ChaboThread(context);
 			chabo.start();
 		} else {
@@ -135,7 +131,7 @@ public class AD {
 	}
 
 	public static AD i() {
-		return instance;
+		return adinstance;
 	}
 	public  void chabostop(Context context) {
 		isrun = false;

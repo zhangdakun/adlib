@@ -1,8 +1,8 @@
 package com.android.adlib;
 
-import android.os.Bundle;
+import com.umeng.analytics.MobclickAgent;import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.view.Menu;
+import android.view.Menu;import android.view.MotionEvent;
 import android.view.MenuItem;
 
 public class ADbasePrefActivity extends PreferenceActivity {
@@ -28,12 +28,12 @@ public class ADbasePrefActivity extends PreferenceActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		AD.i().chabostart(this);
-	}
+		AD.i().chabostart(this);		MobclickAgent.onError(this);
+	}	@Override	protected void onPause() {		// TODO Auto-generated method stub		super.onPause();		MobclickAgent.onPause(this);	}	protected void setChaboInterval(long interval) {		AD.i().setChaboInterval(interval);	}	@Override	protected void onResume() {		// TODO Auto-generated method stub		super.onResume();		MobclickAgent.onResume(this);	}
 	@Override
 	protected void onDestroy() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		AD.i().chabostop(this);
 		super.onDestroy();
-		AD.i().chabostop(this);
-	}
+
+	}	@Override	public boolean onTouchEvent(MotionEvent event) {		// TODO Auto-generated method stub		AD.i().setShowFlag(false);		return super.onTouchEvent(event);	}
 }
